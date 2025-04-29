@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +13,21 @@
             overflow-x: hidden;
         }
         section {
+            display: none;
             min-height: 100vh;
-            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        section.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
         img {
             width: 80%;
@@ -28,6 +35,11 @@
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.7);
             margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.8s ease;
+        }
+        img:hover {
+            transform: scale(1.05);
         }
         h2 {
             margin: 1rem 0 0.5rem;
@@ -40,45 +52,62 @@
             line-height: 1.6;
             color: #ccc;
         }
+        .instruction {
+            font-style: italic;
+            margin-top: 1rem;
+            color: #888;
+        }
     </style>
 </head>
 <body>
 
-    <section>
-        <img src="images/anxiety.jpg" alt="Anxiety">
+    <section id="section-0" class="active">
+        <img src="images/anxiety.jpg" alt="Anxiety" onclick="showSection(1)">
         <h2>Anxiety</h2>
         <p>The mind races, the heart trembles — unseen battles are the loudest.</p>
+        <div class="instruction">Click the image to explore how anxiety leads to depression...</div>
     </section>
 
-    <section>
-        <img src="images/depression.jpg" alt="Depression">
+    <section id="section-1">
+        <img src="images/depression.jpg" alt="Depression" onclick="showSection(2)">
         <h2>Depression</h2>
         <p>Some smiles hide oceans of sorrow.</p>
+        <div class="instruction">Click to see how depression can lead to burnout...</div>
     </section>
 
-    <section>
-        <img src="images/burnout.jpg" alt="Burnout">
+    <section id="section-2">
+        <img src="images/burnout.jpg" alt="Burnout" onclick="showSection(3)">
         <h2>Burnout</h2>
         <p>When passion turns into exhaustion, the soul quietly screams.</p>
+        <div class="instruction">Click to continue through the story of loneliness...</div>
     </section>
 
-    <section>
-        <img src="images/loneliness.jpg" alt="Loneliness">
+    <section id="section-3">
+        <img src="images/loneliness.jpg" alt="Loneliness" onclick="showSection(4)">
         <h2>Loneliness</h2>
         <p>Surrounded, yet alone — a feeling too many know too well.</p>
+        <div class="instruction">Click to begin the path toward healing...</div>
     </section>
 
-    <section>
-        <img src="images/healing.jpg" alt="Healing">
+    <section id="section-4">
+        <img src="images/healing.jpg" alt="Healing" onclick="showSection(5)">
         <h2>Healing</h2>
         <p>Every broken heart learns to heal, given time and kindness.</p>
+        <div class="instruction">Click to discover the power of hope...</div>
     </section>
 
-    <section>
+    <section id="section-5">
         <img src="images/hope.jpg" alt="Hope">
         <h2>Hope</h2>
         <p>The night always ends. Hope rises, fierce and beautiful.</p>
     </section>
 
+    <script>
+        function showSection(index) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(`section-${index}`).classList.add('active');
+        }
+    </script>
 </body>
 </html>
